@@ -1,0 +1,35 @@
+/* Ajout d'animations et de transitions */
+@keyframes slideIn {
+    0% {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Pour les cartes de projet et le formulaire */
+.project, .form-section {
+    animation: slideIn 0.5s ease-out;
+}
+
+/* Animation hover sur les cartes de projet */
+.project:hover, .form-section:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.5rem;
+    }
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    .form-section {
+        padding: 2rem 1.5rem;
+    }
+}
