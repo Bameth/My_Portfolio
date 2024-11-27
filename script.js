@@ -1,11 +1,23 @@
-// Validation simple pour le formulaire
-document.getElementById('contactForm').addEventListener('submit', function (e) {
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
 
-    if (!name || !email || !message) {
-        alert("Tous les champs doivent être remplis!");
-        e.preventDefault();
-    }
+    const formData = new FormData(this);
+
+    fetch('contact.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert(data.message);
+            this.reset();
+        } else {
+            alert(data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Erreur:', error);
+        alert("Une erreur s'est produite. Veuillez réessayer plus tard.");
+    });
 });

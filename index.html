@@ -5,19 +5,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Mon Portfolio</title>
+    <title>Portfolio Dynamique</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.0/cdn.min.js" defer></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Custom animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Hover effect on the cards */
+        .hover-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 
-<body class="bg-gray-100 text-gray-900 font-sans">
 
+<body class="bg-gray-50 text-gray-900 font-sans">
     <!-- Header -->
-    <header class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white py-8">
-        <div class="container mx-auto text-center px-4">
-            <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight mb-4">Bienvenue sur mon Portfolio</h1>
+    <header class="bg-gradient-to-r from-indigo-700 via-purple-700 to-pink-700 text-white py-8  top-0 z-50 shadow-md">
+        <div class="container mx-auto text-center px-6">
+            <h1 class="text-5xl font-extrabold leading-tight mb-4">Bienvenue sur mon Portfolio</h1>
+            <p class="text-lg opacity-90 mb-6">Développeur web passionné par les technologies modernes</p>
             <nav>
-                <ul class="flex justify-center space-x-8 text-lg sm:text-xl font-medium">
+                <ul class="flex justify-center space-x-8 text-lg font-medium">
                     <li><a href="#about" class="hover:text-gray-300 transition duration-300">À propos</a></li>
                     <li><a href="#projects" class="hover:text-gray-300 transition duration-300">Projets</a></li>
                     <li><a href="#contact" class="hover:text-gray-300 transition duration-300">Contact</a></li>
@@ -26,69 +57,120 @@
         </div>
     </header>
 
+    <!-- Hero Section -->
+    <section class="bg-cover bg-center h-screen relative flex items-center justify-center fade-in"
+        style="background-image: url('https://source.unsplash.com/1600x900/?technology');">
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div class="relative text-center text-white px-6">
+            <h2 class="text-4xl sm:text-6xl font-bold mb-4">Créons ensemble des expériences numériques uniques</h2>
+            <a href="#projects"
+                class="inline-block bg-pink-600 hover:bg-pink-700 text-white font-semibold px-6 py-3 rounded-lg mt-6 transition duration-300">Découvrez
+                mes projets</a>
+        </div>
+    </section>
+
     <!-- À propos Section -->
-    <section id="about" class="py-16 bg-white text-center px-4">
-        <div class="container mx-auto max-w-3xl">
-            <h2 class="text-3xl sm:text-4xl font-semibold text-indigo-600 mb-6">À propos de moi</h2>
-            <p class="text-lg sm:text-xl text-gray-700">Je suis un développeur web passionné par les technologies modernes. J'aime créer des expériences interactives et efficaces en utilisant HTML, CSS, JavaScript et PHP. Mon objectif est de rendre chaque projet unique et fonctionnel.</p>
+    <section id="about" class="py-20 bg-white text-center px-6">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-4xl font-semibold text-indigo-600 mb-8">À propos de moi</h2>
+            <p class="text-lg text-gray-700 leading-relaxed">Je suis un développeur web spécialisé dans la création
+                d'interfaces utilisateur élégantes et fonctionnelles. J'ai une expertise dans des technologies comme
+                <span class="font-bold">HTML</span>, <span class="font-bold">CSS</span>, <span
+                    class="font-bold">JavaScript</span>, <span class="font-bold">Java</span>, <span
+                    class="font-bold">Framework Symfony</span>, <span class="font-bold">Python</span>, <span
+                    class="font-bold">Base de données SQL,Postgres</span> et <span class="font-bold">PHP</span>. J'adore
+                relever des défis
+                techniques et explorer des solutions innovantes pour mes projets.
+            </p>
         </div>
     </section>
 
     <!-- Projets Section -->
-    <section id="projects" class="py-16 bg-gray-50 px-4">
+    <section id="projects" class="py-20 bg-gray-50 px-6">
         <div class="container mx-auto text-center">
-            <h2 class="text-3xl sm:text-4xl font-semibold text-indigo-600 mb-8">Mes Projets</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-300 transform hover:scale-105">
-                    <h3 class="text-xl font-semibold mb-4 text-indigo-600">Projet 1</h3>
-                    <p class="text-gray-600 mb-4">Une application web interactive avec des fonctionnalités avancées. <a href="#"
-                            class="text-indigo-600 hover:text-indigo-500">Voir le projet</a></p>
+            <h2 class="text-4xl font-semibold text-indigo-600 mb-12">Mes Projets</h2>
+            <div class="relative" x-data="{ active: 0, total: 3 }">
+                <!-- Carousel -->
+                <div class="overflow-hidden">
+                    <div class="flex transition-transform duration-500"
+                        :style="`transform: translateX(-${active * 100}%)`">
+
+                        <!-- Slide 1 -->
+                        <div class="min-w-full">
+                            <div
+                                class="bg-white shadow-lg rounded-lg overflow-hidden transform hover-card transition duration-300">
+                                <img src="https://source.unsplash.com/400x300/?coding" alt="Projet 1"
+                                    class="w-full h-48 object-cover">
+                                <div class="p-6">
+                                    <h3 class="text-xl font-semibold mb-3">Projet 1: Application Web</h3>
+                                    <p class="text-gray-600 mb-4">Une application web interactive avec des
+                                        fonctionnalités avancées.</p>
+                                    <a href="#" class="text-indigo-600 hover:text-indigo-400">Voir le projet</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 2 -->
+                        <div class="min-w-full">
+                            <div
+                                class="bg-white shadow-lg rounded-lg overflow-hidden transform hover-card transition duration-300">
+                                <img src="https://source.unsplash.com/400x300/?design" alt="Projet 2"
+                                    class="w-full h-48 object-cover">
+                                <div class="p-6">
+                                    <h3 class="text-xl font-semibold mb-3">Projet 2: Site E-commerce</h3>
+                                    <p class="text-gray-600 mb-4">Un site e-commerce optimisé pour les performances et
+                                        la sécurité.</p>
+                                    <a href="#" class="text-indigo-600 hover:text-indigo-400">Voir le projet</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 3 -->
+                        <div class="min-w-full">
+                            <div
+                                class="bg-white shadow-lg rounded-lg overflow-hidden transform hover-card transition duration-300">
+                                <img src="https://source.unsplash.com/400x300/?data" alt="Projet 3"
+                                    class="w-full h-48 object-cover">
+                                <div class="p-6">
+                                    <h3 class="text-xl font-semibold mb-3">Projet 3: Gestion de Contenu</h3>
+                                    <p class="text-gray-600 mb-4">Une plateforme moderne de gestion de contenu pour les
+                                        entreprises.</p>
+                                    <a href="#" class="text-indigo-600 hover:text-indigo-400">Voir le projet</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-300 transform hover:scale-105">
-                    <h3 class="text-xl font-semibold mb-4 text-indigo-600">Projet 2</h3>
-                    <p class="text-gray-600 mb-4">Un site e-commerce optimisé pour les performances. <a href="#"
-                            class="text-indigo-600 hover:text-indigo-500">Voir le projet</a></p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-300 transform hover:scale-105">
-                    <h3 class="text-xl font-semibold mb-4 text-indigo-600">Projet 3</h3>
-                    <p class="text-gray-600 mb-4">Une plateforme de gestion de contenu moderne. <a href="#"
-                            class="text-indigo-600 hover:text-indigo-500">Voir le projet</a></p>
+
+                <!-- Navigation -->
+                <div class="flex justify-center mt-4 space-x-4">
+                    <button @click="active = (active - 1 + total) % total"
+                        class="px-3 py-2 bg-gray-300 rounded">&#8592;</button>
+                    <button @click="active = (active + 1) % total"
+                        class="px-3 py-2 bg-gray-300 rounded">&#8594;</button>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-white px-4">
+    <section id="contact" class="py-20 bg-white px-6">
         <div class="container mx-auto text-center">
-            <h2 class="text-3xl sm:text-4xl font-semibold text-indigo-600 mb-8">Contactez-moi</h2>
-            <form id="contactForm" class="max-w-lg mx-auto space-y-6 bg-indigo-50 p-8 rounded-lg shadow-lg">
-                <div>
-                    <input type="text" id="name" name="name" placeholder="Nom"
-                        class="w-full p-4 border border-indigo-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                </div>
-                <div>
-                    <input type="email" id="email" name="email" placeholder="Email"
-                        class="w-full p-4 border border-indigo-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                </div>
-                <div>
-                    <textarea id="message" name="message" placeholder="Votre message..."
-                        class="w-full p-4 border border-indigo-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
-                </div>
-                <div>
-                    <button type="submit"
-                        class="w-full py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition duration-300">Envoyer</button>
-                </div>
+            <h2 class="text-4xl font-semibold text-indigo-600 mb-8">Contactez-moi</h2>
+            <form id="contactForm" action="https://formspree.io/f/xzzbjaew" method="POST"
+                class="max-w-lg mx-auto bg-gray-100 p-8 rounded-lg shadow-lg space-y-6">
+                <input type="text" id="name" name="name" placeholder="Nom" required
+                    class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <input type="email" id="email" name="email" placeholder="Email" required
+                    class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <textarea id="message" name="message" placeholder="Votre message..." required
+                    class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                <button type="submit"
+                    class="w-full py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition duration-300">Envoyer</button>
             </form>
         </div>
     </section>
-
-    <!-- Footer -->
-    <footer class="bg-indigo-600 text-white py-6 text-center">
-        <p>&copy; 2024 Mon Portfolio - Tous droits réservés.</p>
-    </footer>
-
-    <script src="script.js"></script>
 </body>
 
 </html>

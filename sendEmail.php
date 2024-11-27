@@ -1,18 +1,31 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $message = $_POST['message'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = htmlspecialchars($_POST['name']);
+    $email = htmlspecialchars($_POST['email']);
+    $message = htmlspecialchars($_POST['message']);
 
-    $to = "amethba8826@gmail.com";
-    $subject = "Message de ton portfolio";
-    $body = "Nom: $name\nEmail: $email\n\nMessage:\n$message";
+    // Validation des champs
+    if (empty($name) || empty($email) || empty($message)) {
+        echo json_encode(['status' => 'error', 'message' => 'Tous les champs sont obligatoires.']);
+        exit;
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo json_encode(['status' => 'error', 'message' => 'Adresse e-mail invalide.']);
+        exit;
+    }
+
+    $to = "votre.email@example.com";
+    $subject = "Nouveau message de votre portfolio";
+    $body = "Nom: $name\nEmail: $email\nMessage:\n$message";
     $headers = "From: $email";
 
     if (mail($to, $subject, $body, $headers)) {
-        echo "Message envoyé avec succès.";
+        echo json_encode(['status' => 'success', 'message' => 'Merci pour votre message !']);
     } else {
-        echo "Une erreur est survenue. Essayez encore.";
+        echo json_encode(['status' => 'error', 'message' => "Une erreur s'est produite lors de l'envoi du message."]);
     }
+} else {
+    echo json_encode(['status' => 'error', 'message' => 'Méthode non autorisée.']);
 }
 ?>
