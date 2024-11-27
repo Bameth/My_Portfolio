@@ -6,11 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Portfolio Dynamique</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="dist/styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.0/cdn.min.js" defer></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Roboto:wght@400;500&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         /* Custom animations */
         @keyframes fadeIn {
@@ -33,38 +32,95 @@
         }
 
         /* Hover effect on the cards */
-        .hover-card:hover {
+        .project-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Tech Icons */
+        .tech-icons i {
+            font-size: 1.75rem;
+            color: #6366f1;
+            margin: 0 1rem;
+            transition: color 0.3s;
+        }
+
+        .tech-icons i:hover {
+            color: #4f46e5;
+        }
+
+        /* Modern Navigation */
+        nav ul li a {
+            padding: 0.5rem 1.25rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #4f46e5;
+        }
+
+        /* Sticky Navbar */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hero-section .text-wrapper h2 {
+            font-size: 3.5rem;
+        }
+
+        .hero-section .text-wrapper a {
+            background-color: #6366f1;
+            border-radius: 8px;
+            padding: 12px 32px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .hero-section .text-wrapper a:hover {
+            background-color: #4f46e5;
         }
     </style>
 </head>
 
-
-<body class="bg-gray-50 text-gray-900 font-sans">
+<body class="bg-gray-50 text-gray-900 font-inter">
     <!-- Header -->
-    <header class="bg-gradient-to-r from-indigo-700 via-purple-700 to-pink-700 text-white py-8  top-0 z-50 shadow-md">
-        <div class="container mx-auto text-center px-6">
-            <h1 class="text-5xl font-extrabold leading-tight mb-4">Bienvenue sur mon Portfolio</h1>
-            <p class="text-lg opacity-90 mb-6">Développeur web passionné par les technologies modernes</p>
+    <header class="bg-gradient-to-r from-indigo-600 via-indigo-700 to-indigo-800 text-white py-8 shadow-lg">
+        <div class="container mx-auto px-6 navbar-container">
+            <h1 class="text-3xl font-bold">Mon Portfolio</h1>
             <nav>
-                <ul class="flex justify-center space-x-8 text-lg font-medium">
-                    <li><a href="#about" class="hover:text-gray-300 transition duration-300">À propos</a></li>
-                    <li><a href="#projects" class="hover:text-gray-300 transition duration-300">Projets</a></li>
-                    <li><a href="#contact" class="hover:text-gray-300 transition duration-300">Contact</a></li>
+                <ul class="flex space-x-8 text-lg font-semibold">
+                    <li><a href="#about" class="hover:text-indigo-400 transition">À propos</a></li>
+                    <li><a href="#projects" class="hover:text-indigo-400 transition">Projets</a></li>
+                    <li><a href="#contact" class="hover:text-indigo-400 transition">Contact</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="bg-cover bg-center h-screen relative flex items-center justify-center fade-in"
+    <section class="hero-section bg-cover bg-center h-screen flex items-center justify-center relative"
         style="background-image: url('https://source.unsplash.com/1600x900/?technology');">
         <div class="absolute inset-0 bg-black bg-opacity-50"></div>
-        <div class="relative text-center text-white px-6">
-            <h2 class="text-4xl sm:text-6xl font-bold mb-4">Créons ensemble des expériences numériques uniques</h2>
+        <div class="text-wrapper relative text-center text-white px-6 fade-in">
+            <h2 class="font-bold leading-tight mb-4 text-white">Créons des solutions numériques impactantes</h2>
             <a href="#projects"
-                class="inline-block bg-pink-600 hover:bg-pink-700 text-white font-semibold px-6 py-3 rounded-lg mt-6 transition duration-300">Découvrez
+                class="transition-transform inline-block px-6 py-3 text-white font-bold rounded-lg hover:bg-indigo-500 transition duration-300">Découvrez
                 mes projets</a>
         </div>
     </section>
@@ -73,15 +129,21 @@
     <section id="about" class="py-20 bg-white text-center px-6">
         <div class="container mx-auto max-w-4xl">
             <h2 class="text-4xl font-semibold text-indigo-600 mb-8">À propos de moi</h2>
-            <p class="text-lg text-gray-700 leading-relaxed">Je suis un développeur web spécialisé dans la création
-                d'interfaces utilisateur élégantes et fonctionnelles. J'ai une expertise dans des technologies comme
-                <span class="font-bold">HTML</span>, <span class="font-bold">CSS</span>, <span
-                    class="font-bold">JavaScript</span>, <span class="font-bold">Java</span>, <span
-                    class="font-bold">Framework Symfony</span>, <span class="font-bold">Python</span>, <span
-                    class="font-bold">Base de données SQL,Postgres</span> et <span class="font-bold">PHP</span>. J'adore
-                relever des défis
-                techniques et explorer des solutions innovantes pour mes projets.
+            <p class="text-lg text-gray-700 leading-relaxed mb-8">
+                Je suis un développeur web passionné, avec une expertise dans des technologies comme HTML, CSS,
+                JavaScript, PHP, Symfony, Python, et plus encore.
+                Mon but est de créer des expériences utilisateurs efficaces et esthétiques, tout en résolvant des
+                problèmes complexes avec des solutions innovantes.
             </p>
+            <div class="tech-icons flex justify-center mb-12">
+                <i class="fab fa-html5"></i>
+                <i class="fab fa-css3-alt"></i>
+                <i class="fab fa-js"></i>
+                <i class="fab fa-php"></i>
+                <i class="fab fa-java"></i>
+                <i class="fab fa-python"></i>
+                <i class="fab fa-symfony"></i>
+            </div>
         </div>
     </section>
 
@@ -90,65 +152,61 @@
         <div class="container mx-auto text-center">
             <h2 class="text-4xl font-semibold text-indigo-600 mb-12">Mes Projets</h2>
             <div class="relative" x-data="{ active: 0, total: 3 }">
-                <!-- Carousel -->
                 <div class="overflow-hidden">
                     <div class="flex transition-transform duration-500"
                         :style="`transform: translateX(-${active * 100}%)`">
-
-                        <!-- Slide 1 -->
-                        <div class="min-w-full">
-                            <div
-                                class="bg-white shadow-lg rounded-lg overflow-hidden transform hover-card transition duration-300">
-                                <img src="https://source.unsplash.com/400x300/?coding" alt="Projet 1"
+                        <!-- Project 1 -->
+                        <div class="min-w-full p-4">
+                            <div class="bg-white shadow-lg rounded-lg overflow-hidden project-card hover:shadow-xl">
+                                <img src="https://source.unsplash.com/400x300/?app" alt="Projet 1"
                                     class="w-full h-48 object-cover">
                                 <div class="p-6">
-                                    <h3 class="text-xl font-semibold mb-3">Projet 1: Application Web</h3>
-                                    <p class="text-gray-600 mb-4">Une application web interactive avec des
-                                        fonctionnalités avancées.</p>
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-400">Voir le projet</a>
+                                    <h3 class="text-xl font-semibold mb-3">Application Web de Gestion</h3>
+                                    <p class="text-gray-600 mb-4">Une application Web réalisée en PHP pour la gestion
+                                        des étudiants.</p>
+                                    <a href="https://github.com/Bameth/GESTION-ETUDIANT-PHP"
+                                        class="text-indigo-600 hover:text-indigo-400">Voir le projet</a>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Slide 2 -->
-                        <div class="min-w-full">
-                            <div
-                                class="bg-white shadow-lg rounded-lg overflow-hidden transform hover-card transition duration-300">
+                        <!-- Project 2 -->
+                        <div class="min-w-full p-4">
+                            <div class="bg-white shadow-lg rounded-lg overflow-hidden project-card hover:shadow-xl">
                                 <img src="https://source.unsplash.com/400x300/?design" alt="Projet 2"
                                     class="w-full h-48 object-cover">
                                 <div class="p-6">
-                                    <h3 class="text-xl font-semibold mb-3">Projet 2: Site E-commerce</h3>
-                                    <p class="text-gray-600 mb-4">Un site e-commerce optimisé pour les performances et
-                                        la sécurité.</p>
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-400">Voir le projet</a>
+                                    <h3 class="text-xl font-semibold mb-3">Gestion d'Atelier de Couture</h3>
+                                    <p class="text-gray-600 mb-4">Application pour la gestion d'atelier de couture
+                                        développée en PHP.</p>
+                                    <a href="https://github.com/Bameth/PROJET_COUTURE_PHP"
+                                        class="text-indigo-600 hover:text-indigo-400">Voir le projet</a>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Slide 3 -->
-                        <div class="min-w-full">
-                            <div
-                                class="bg-white shadow-lg rounded-lg overflow-hidden transform hover-card transition duration-300">
+                        <!-- Project 3 -->
+                        <div class="min-w-full p-4">
+                            <div class="bg-white shadow-lg rounded-lg overflow-hidden project-card hover:shadow-xl">
                                 <img src="https://source.unsplash.com/400x300/?data" alt="Projet 3"
                                     class="w-full h-48 object-cover">
                                 <div class="p-6">
-                                    <h3 class="text-xl font-semibold mb-3">Projet 3: Gestion de Contenu</h3>
-                                    <p class="text-gray-600 mb-4">Une plateforme moderne de gestion de contenu pour les
-                                        entreprises.</p>
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-400">Voir le projet</a>
+                                    <h3 class="text-xl font-semibold mb-3">Gestion Allocation Chambre</h3>
+                                    <p class="text-gray-600 mb-4">Application console en Java pour gérer l'attribution
+                                        des chambres aux étudiants.</p>
+                                    <a href="https://github.com/Bameth/ges_allocation_chambre_ucad_JAVA"
+                                        class="text-indigo-600 hover:text-indigo-400">Voir le projet</a>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
                 <!-- Navigation -->
                 <div class="flex justify-center mt-4 space-x-4">
                     <button @click="active = (active - 1 + total) % total"
-                        class="px-3 py-2 bg-gray-300 rounded">&#8592;</button>
-                    <button @click="active = (active + 1) % total"
-                        class="px-3 py-2 bg-gray-300 rounded">&#8594;</button>
+                        class="px-4 py-2 bg-gray-300 rounded">◀</button>
+                    <button @click="active = (active + 1) % total" class="px-4 py-2 bg-gray-300 rounded">▶</button>
                 </div>
             </div>
         </div>
@@ -159,18 +217,23 @@
         <div class="container mx-auto text-center">
             <h2 class="text-4xl font-semibold text-indigo-600 mb-8">Contactez-moi</h2>
             <form id="contactForm" action="https://formspree.io/f/xzzbjaew" method="POST"
-                class="max-w-lg mx-auto bg-gray-100 p-8 rounded-lg shadow-lg space-y-6">
+                class="max-w-lg mx-auto bg-gray-100 p-8 rounded-lg shadow-lg space-y-6" novalidate>
                 <input type="text" id="name" name="name" placeholder="Nom" required
-                    class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
                 <input type="email" id="email" name="email" placeholder="Email" required
-                    class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
                 <textarea id="message" name="message" placeholder="Votre message..." required
-                    class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                    class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"></textarea>
                 <button type="submit"
                     class="w-full py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition duration-300">Envoyer</button>
             </form>
         </div>
     </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 text-center">
+        <p>&copy; 2024 Mon Portfolio. Tous droits réservés.</p>
+    </footer>
 </body>
 
 </html>
