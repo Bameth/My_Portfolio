@@ -1,0 +1,98 @@
+/* Custom animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Hover effect on the cards */
+        .project-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Tech Icons */
+        .tech-icons i {
+            font-size: 2rem;
+            color: #6366f1;
+            margin: 0 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .tech-icons i:hover {
+            color: #4f46e5;
+        }
+
+        /* Sticky Navbar */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hero-section .text-wrapper h2 {
+            font-size: 3.5rem;
+        }
+
+        .hero-section .text-wrapper a {
+            background-color: #6366f1;
+            border-radius: 8px;
+            padding: 12px 32px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background-color 0.3s;
+        }
+
+        .hero-section .text-wrapper a:hover {
+            background-color: #4f46e5;
+        }
+
+        /* Skills Section */
+        .skills-bar {
+            background-color: #e5e7eb;
+            border-radius: 10px;
+            height: 10px;
+            margin: 10px 0;
+        }
+
+        .skills-bar .progress {
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1f2937;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        footer a {
+            color: #6366f1;
+            text-decoration: none;
+        }

@@ -6,96 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Portfolio Dynamique</title>
-    <link rel="stylesheet" href="dist/styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.0/cdn.min.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <style>
-        /* Custom animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        .fade-in {
-            animation: fadeIn 1.5s ease-in-out;
-        }
-
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Hover effect on the cards */
-        .project-card {
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Tech Icons */
-        .tech-icons i {
-            font-size: 1.75rem;
-            color: #6366f1;
-            margin: 0 1rem;
-            transition: color 0.3s;
-        }
-
-        .tech-icons i:hover {
-            color: #4f46e5;
-        }
-
-        /* Modern Navigation */
-        nav ul li a {
-            padding: 0.5rem 1.25rem;
-            text-transform: uppercase;
-            font-weight: 600;
-            letter-spacing: 1px;
-            transition: color 0.3s;
-        }
-
-        nav ul li a:hover {
-            color: #4f46e5;
-        }
-
-        /* Sticky Navbar */
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            backdrop-filter: blur(10px);
-        }
-
-        .navbar-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .hero-section .text-wrapper h2 {
-            font-size: 3.5rem;
-        }
-
-        .hero-section .text-wrapper a {
-            background-color: #6366f1;
-            border-radius: 8px;
-            padding: 12px 32px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .hero-section .text-wrapper a:hover {
-            background-color: #4f46e5;
-        }
-    </style>
+    <link rel="stylesheet" href="dist/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.0/cdn.min.js" defer></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="bg-gray-50 text-gray-900 font-inter">
@@ -118,7 +33,7 @@
         style="background-image: url('https://source.unsplash.com/1600x900/?technology');">
         <div class="absolute inset-0 bg-black bg-opacity-50"></div>
         <div class="text-wrapper relative text-center text-white px-6 fade-in">
-            <h2 class="font-bold leading-tight mb-4 text-white">Créons des solutions numériques impactantes</h2>
+            <h2 class="font-bold leading-tight mb-4">Créons des solutions numériques impactantes</h2>
             <a href="#projects"
                 class="transition-transform inline-block px-6 py-3 text-white font-bold rounded-lg hover:bg-indigo-500 transition duration-300">Découvrez
                 mes projets</a>
@@ -132,8 +47,6 @@
             <p class="text-lg text-gray-700 leading-relaxed mb-8">
                 Je suis un développeur web passionné, avec une expertise dans des technologies comme HTML, CSS,
                 JavaScript, PHP, Symfony, Python, et plus encore.
-                Mon but est de créer des expériences utilisateurs efficaces et esthétiques, tout en résolvant des
-                problèmes complexes avec des solutions innovantes.
             </p>
             <div class="tech-icons flex justify-center mb-12">
                 <i class="fab fa-html5"></i>
@@ -143,6 +56,24 @@
                 <i class="fab fa-java"></i>
                 <i class="fab fa-python"></i>
                 <i class="fab fa-symfony"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gray-50 px-6">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl font-semibold text-indigo-600 mb-12">Mes compétences</h2>
+            <div class="max-w-lg mx-auto">
+                <div class="skills-bar mb-6">
+                    <div class="progress bg-indigo-600" style="width: 80%;"></div>
+                </div>
+                <div class="skills-bar mb-6">
+                    <div class="progress bg-green-600" style="width: 70%;"></div>
+                </div>
+                <div class="skills-bar mb-6">
+                    <div class="progress bg-blue-600" style="width: 60%;"></div>
+                </div>
             </div>
         </div>
     </section>
@@ -177,9 +108,9 @@
                                     class="w-full h-48 object-cover">
                                 <div class="p-6">
                                     <h3 class="text-xl font-semibold mb-3">Gestion d'Atelier de Couture</h3>
-                                    <p class="text-gray-600 mb-4">Application pour la gestion d'atelier de couture
-                                        développée en PHP.</p>
-                                    <a href="https://github.com/Bameth/PROJET_COUTURE_PHP"
+                                    <p class="text-gray-600 mb-4">Application de gestion d'un atelier avec ajout de
+                                        produits et suivi des commandes.</p>
+                                    <a href="https://github.com/Bameth/atelier-couture"
                                         class="text-indigo-600 hover:text-indigo-400">Voir le projet</a>
                                 </div>
                             </div>
@@ -188,36 +119,38 @@
                         <!-- Project 3 -->
                         <div class="min-w-full p-4">
                             <div class="bg-white shadow-lg rounded-lg overflow-hidden project-card hover:shadow-xl">
-                                <img src="https://source.unsplash.com/400x300/?data" alt="Projet 3"
+                                <img src="https://source.unsplash.com/400x300/?database" alt="Projet 3"
                                     class="w-full h-48 object-cover">
                                 <div class="p-6">
-                                    <h3 class="text-xl font-semibold mb-3">Gestion Allocation Chambre</h3>
-                                    <p class="text-gray-600 mb-4">Application console en Java pour gérer l'attribution
-                                        des chambres aux étudiants.</p>
-                                    <a href="https://github.com/Bameth/ges_allocation_chambre_ucad_JAVA"
+                                    <h3 class="text-xl font-semibold mb-3">Gestion de Stock</h3>
+                                    <p class="text-gray-600 mb-4">Système de gestion de stock avec suivi de produits en
+                                        temps réel.</p>
+                                    <a href="https://github.com/Bameth/gestion-stock"
                                         class="text-indigo-600 hover:text-indigo-400">Voir le projet</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Navigation -->
-                <div class="flex justify-center mt-4 space-x-4">
-                    <button @click="active = (active - 1 + total) % total"
-                        class="px-4 py-2 bg-gray-300 rounded">◀</button>
-                    <button @click="active = (active + 1) % total" class="px-4 py-2 bg-gray-300 rounded">▶</button>
+                <div class="absolute top-0 bottom-0 left-0 right-0 flex justify-between items-center">
+                    <button @click="active = (active === 0) ? total - 1 : active - 1"
+                        class="bg-white text-indigo-600 rounded-full p-4 shadow-md hover:bg-indigo-600 hover:text-white">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button @click="active = (active === total - 1) ? 0 : active + 1"
+                        class="bg-white text-indigo-600 rounded-full p-4 shadow-md hover:bg-indigo-600 hover:text-white">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
                 </div>
             </div>
         </div>
     </section>
-
     <!-- Contact Section -->
     <section id="contact" class="py-20 bg-white px-6">
         <div class="container mx-auto text-center">
             <h2 class="text-4xl font-semibold text-indigo-600 mb-8">Contactez-moi</h2>
             <form id="contactForm" action="https://formspree.io/f/xzzbjaew" method="POST"
-                class="max-w-lg mx-auto bg-gray-100 p-8 rounded-lg shadow-lg space-y-6" novalidate>
+                class="max-w-lg mx-auto bg-gray-100 p-8 rounded-lg shadow-lg space-y-6">
                 <input type="text" id="name" name="name" placeholder="Nom" required
                     class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
                 <input type="email" id="email" name="email" placeholder="Email" required
@@ -231,8 +164,8 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8 text-center">
-        <p>&copy; 2024 Mon Portfolio. Tous droits réservés.</p>
+    <footer>
+        <p>&copy; 2024 Mon Portfolio - <a href="https://github.com/Bameth">Mon Github</a></p>
     </footer>
 </body>
 
