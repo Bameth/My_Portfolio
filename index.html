@@ -8,15 +8,91 @@
     <title>Portfolio Dynamique</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="dist/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.0/cdn.min.js" defer></script>
-    <link rel="stylesheet" href="style.css">
 </head>
 
+<style>
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    .fade-in {
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    .project-card {
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+    }
+
+    .project-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .hero-section .text-wrapper h2 {
+        font-size: 3.5rem;
+    }
+
+    .hero-section .text-wrapper a {
+        background-color: #6366f1;
+        border-radius: 8px;
+        padding: 12px 32px;
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: background-color 0.3s;
+    }
+
+    .hero-section .text-wrapper a:hover {
+        background-color: #4f46e5;
+    }
+
+    .skills-bar {
+        background-color: #e5e7eb;
+        border-radius: 10px;
+        height: 10px;
+        margin: 10px 0;
+    }
+
+    .skills-bar .progress {
+        height: 100%;
+        border-radius: 10px;
+    }
+
+    footer {
+        background-color: #1f2937;
+        color: white;
+        text-align: center;
+        padding: 20px;
+    }
+
+    footer a {
+        color: white;
+        text-decoration: none;
+    }
+</style>
+
 <body class="bg-gray-50 text-gray-900 font-inter">
-    <!-- Header -->
-    <header class="bg-gradient-to-r from-indigo-600 via-indigo-700 to-indigo-800 text-white py-8 shadow-lg">
-        <div class="container mx-auto px-6 navbar-container">
+
+    <header
+        class="bg-gradient-to-r from-indigo-600 via-indigo-700 to-indigo-800 text-white py-6 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-6 flex justify-between items-center">
             <h1 class="text-3xl font-bold">Mon Portfolio</h1>
             <nav>
                 <ul class="flex space-x-8 text-lg font-semibold">
@@ -28,19 +104,18 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero-section bg-cover bg-center h-screen flex items-center justify-center relative"
         style="background-image: url('https://source.unsplash.com/1600x900/?technology');">
         <div class="absolute inset-0 bg-black bg-opacity-50"></div>
-        <div class="text-wrapper relative text-center text-white px-6 fade-in">
-            <h2 class="font-bold leading-tight mb-4">Créons des solutions numériques impactantes</h2>
+        <div class="relative text-center text-white px-6">
+            <h2 class="font-bold text-4xl sm:text-5xl md:text-6xl mb-4">Créons des solutions numériques impactantes</h2>
             <a href="#projects"
-                class="transition-transform inline-block px-6 py-3 text-white font-bold rounded-lg hover:bg-indigo-500 transition duration-300">Découvrez
-                mes projets</a>
+                class="transition-transform inline-block px-6 py-3 text-white font-bold rounded-lg bg-indigo-600 hover:bg-indigo-500 transition duration-300">
+                Découvrez mes projets
+            </a>
         </div>
     </section>
 
-    <!-- À propos Section -->
     <section id="about" class="py-20 bg-white text-center px-6">
         <div class="container mx-auto max-w-4xl">
             <h2 class="text-4xl font-semibold text-indigo-600 mb-8">À propos de moi</h2>
@@ -48,125 +123,130 @@
                 Je suis un développeur web passionné, avec une expertise dans des technologies comme HTML, CSS,
                 JavaScript, PHP, Symfony, Python, et plus encore.
             </p>
-            <div class="tech-icons flex justify-center mb-12">
-                <i class="fab fa-html5"></i>
-                <i class="fab fa-css3-alt"></i>
-                <i class="fab fa-js"></i>
-                <i class="fab fa-php"></i>
-                <i class="fab fa-java"></i>
-                <i class="fab fa-python"></i>
-                <i class="fab fa-symfony"></i>
+            <div class="tech-icons flex justify-center gap-6 mb-12">
+                <i class="fab fa-html5 text-4xl text-orange-500 hover:text-orange-600 transition"></i>
+                <i class="fab fa-css3-alt text-4xl text-blue-500 hover:text-blue-600 transition"></i>
+                <i class="fab fa-js text-4xl text-yellow-500 hover:text-yellow-600 transition"></i>
+                <i class="fab fa-php text-4xl text-purple-600 hover:text-purple-700 transition"></i>
+                <i class="fab fa-java text-4xl text-red-600 hover:text-red-700 transition"></i>
+                <i class="fab fa-python text-4xl text-green-600 hover:text-green-700 transition"></i>
+                <i class="fab fa-symfony text-4xl text-black hover:text-gray-700 transition"></i>
             </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="py-20 bg-gray-50 px-6">
-        <div class="container mx-auto text-center">
-            <h2 class="text-4xl font-semibold text-indigo-600 mb-12">Mes compétences</h2>
-            <div class="max-w-lg mx-auto">
-                <div class="skills-bar mb-6">
-                    <div class="progress bg-indigo-600" style="width: 80%;"></div>
-                </div>
-                <div class="skills-bar mb-6">
-                    <div class="progress bg-green-600" style="width: 70%;"></div>
-                </div>
-                <div class="skills-bar mb-6">
-                    <div class="progress bg-blue-600" style="width: 60%;"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projets Section -->
     <section id="projects" class="py-20 bg-gray-50 px-6">
         <div class="container mx-auto text-center">
             <h2 class="text-4xl font-semibold text-indigo-600 mb-12">Mes Projets</h2>
-            <div class="relative" x-data="{ active: 0, total: 3 }">
-                <div class="overflow-hidden">
-                    <div class="flex transition-transform duration-500"
-                        :style="`transform: translateX(-${active * 100}%)`">
-                        <!-- Project 1 -->
-                        <div class="min-w-full p-4">
-                            <div class="bg-white shadow-lg rounded-lg overflow-hidden project-card hover:shadow-xl">
-                                <img src="https://source.unsplash.com/400x300/?app" alt="Projet 1"
-                                    class="w-full h-48 object-cover">
-                                <div class="p-6">
-                                    <h3 class="text-xl font-semibold mb-3">Application Web de Gestion</h3>
-                                    <p class="text-gray-600 mb-4">Une application Web réalisée en PHP pour la gestion
-                                        des étudiants.</p>
-                                    <a href="https://github.com/Bameth/GESTION-ETUDIANT-PHP"
-                                        class="text-indigo-600 hover:text-indigo-400">Voir le projet</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Project 2 -->
-                        <div class="min-w-full p-4">
-                            <div class="bg-white shadow-lg rounded-lg overflow-hidden project-card hover:shadow-xl">
-                                <img src="https://source.unsplash.com/400x300/?design" alt="Projet 2"
-                                    class="w-full h-48 object-cover">
-                                <div class="p-6">
-                                    <h3 class="text-xl font-semibold mb-3">Gestion d'Atelier de Couture</h3>
-                                    <p class="text-gray-600 mb-4">Application de gestion d'un atelier avec ajout de
-                                        produits et suivi des commandes.</p>
-                                    <a href="https://github.com/Bameth/atelier-couture"
-                                        class="text-indigo-600 hover:text-indigo-400">Voir le projet</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Project 3 -->
-                        <div class="min-w-full p-4">
-                            <div class="bg-white shadow-lg rounded-lg overflow-hidden project-card hover:shadow-xl">
-                                <img src="https://source.unsplash.com/400x300/?database" alt="Projet 3"
-                                    class="w-full h-48 object-cover">
-                                <div class="p-6">
-                                    <h3 class="text-xl font-semibold mb-3">Gestion de Stock</h3>
-                                    <p class="text-gray-600 mb-4">Système de gestion de stock avec suivi de produits en
-                                        temps réel.</p>
-                                    <a href="https://github.com/Bameth/gestion-stock"
-                                        class="text-indigo-600 hover:text-indigo-400">Voir le projet</a>
-                                </div>
-                            </div>
-                        </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+                <div
+                    class="project-card bg-white shadow-lg rounded-lg hover:shadow-xl transition transform hover:scale-105">
+                    <img src="https://source.unsplash.com/400x300/?app" alt="Projet 1"
+                        class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3">Application Web de Gestion</h3>
+                        <p class="text-gray-600 mb-4">Une application Web réalisée en PHP pour la gestion des étudiants.
+                        </p>
+                        <a href="https://github.com/Bameth/GESTION-ETUDIANT-PHP"
+                            class="text-indigo-600 hover:text-indigo-400">Voir le projet</a>
                     </div>
                 </div>
-                <div class="absolute top-0 bottom-0 left-0 right-0 flex justify-between items-center">
-                    <button @click="active = (active === 0) ? total - 1 : active - 1"
-                        class="bg-white text-indigo-600 rounded-full p-4 shadow-md hover:bg-indigo-600 hover:text-white">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <button @click="active = (active === total - 1) ? 0 : active + 1"
-                        class="bg-white text-indigo-600 rounded-full p-4 shadow-md hover:bg-indigo-600 hover:text-white">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
+                <div
+                    class="project-card bg-white shadow-lg rounded-lg hover:shadow-xl transition transform hover:scale-105">
+                    <img src="https://source.unsplash.com/400x300/?design" alt="Projet 2"
+                        class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3">Gestion d'Atelier de Couture</h3>
+                        <p class="text-gray-600 mb-4">Application de gestion d'un atelier avec ajout de produits et
+                            suivi des commandes.</p>
+                        <a href="https://github.com/Bameth/atelier-couture"
+                            class="text-indigo-600 hover:text-indigo-400">Voir le projet</a>
+                    </div>
+                </div>
+                <div
+                    class="project-card bg-white shadow-lg rounded-lg hover:shadow-xl transition transform hover:scale-105">
+                    <img src="https://source.unsplash.com/400x300/?database" alt="Projet 3"
+                        class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3">Gestion de Stock avec API</h3>
+                        <p class="text-gray-600 mb-4">Une application avec une API pour gérer le stock de produits dans
+                            une boutique.</p>
+                        <a href="https://github.com/Bameth/gestion-stock"
+                            class="text-indigo-600 hover:text-indigo-400">Voir le projet</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-white px-6">
+    <section id="contact" class="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-100 px-6">
         <div class="container mx-auto text-center">
-            <h2 class="text-4xl font-semibold text-indigo-600 mb-8">Contactez-moi</h2>
+            <h2 class="text-4xl font-bold text-indigo-600 mb-8">Contactez-moi</h2>
+            <p class="mb-6 text-gray-600">N'hésitez pas à me contacter pour toute question ou collaboration !</p>
             <form id="contactForm" action="https://formspree.io/f/xzzbjaew" method="POST"
-                class="max-w-lg mx-auto bg-gray-100 p-8 rounded-lg shadow-lg space-y-6">
-                <input type="text" id="name" name="name" placeholder="Nom" required
-                    class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
-                <input type="email" id="email" name="email" placeholder="Email" required
-                    class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
-                <textarea id="message" name="message" placeholder="Votre message..." required
-                    class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"></textarea>
+                class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg space-y-6">
+                <input type="text" id="name" name="name" placeholder="Votre nom complet"
+                    class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+                <input type="email" id="email" name="email" placeholder="Votre adresse email"
+                    class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+                <textarea id="message" name="message" placeholder="Votre message" rows="6"
+                    class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"></textarea>
                 <button type="submit"
-                    class="w-full py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition duration-300">Envoyer</button>
+                    class="w-full py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-500 transition duration-300">
+                    Envoyer le message
+                </button>
             </form>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 Mon Portfolio - <a href="https://github.com/Bameth">Mon Github</a></p>
+    <footer class="bg-indigo-600 text-white py-4">
+        <p>&copy; 2024 Mon Portfolio | <a href="https://github.com/Bameth" target="_blank" rel="noopener"
+                class="underline">GitHub</a>
+        </p>
     </footer>
+
 </body>
 
 </html>
+
+<script defer>
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('contactForm');
+        form.addEventListener('submit', (e) => {
+            const name = document.getElementById('name');
+            const email = document.getElementById('email');
+            const message = document.getElementById('message');
+            let valid = true;
+
+            if (!name.value.trim()) {
+                valid = false;
+                name.classList.add('border-red-500');
+                name.placeholder = 'Veuillez saisir votre nom';
+            } else {
+                name.classList.remove('border-red-500');
+            }
+
+            if (!email.value.match(/^[\w.%+-]+@[\w.-]+\.[a-zA-Z]{2,}$/)) {
+                valid = false;
+                email.classList.add('border-red-500');
+                email.placeholder = 'Format email incorrect';
+            } else {
+                email.classList.remove('border-red-500');
+            }
+
+            if (!message.value.trim()) {
+                valid = false;
+                message.classList.add('border-red-500');
+                message.placeholder = 'Veuillez saisir votre message';
+            } else {
+                message.classList.remove('border-red-500');
+            }
+
+            if (!valid) {
+                e.preventDefault();
+            }
+        });
+    });
+</script>
